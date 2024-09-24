@@ -1,6 +1,11 @@
 from app.operations import addition, subtraction, multiplication, division
 
 class Calculator:
+
+    @staticmethod
+    def create():
+        return Calculator()
+        
     def addition(self, a, b):
         return a + b
 

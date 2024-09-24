@@ -1,11 +1,10 @@
 import pytest
-
 from app.calculator import Calculator  # assuming the class is in a file named calculator.py
 
 # Fixture to instantiate the Calculator class
 @pytest.fixture
 def calculator():
-    return Calculator()
+    return Calculator.create()
 
 # Parameterized tests for addition
 @pytest.mark.parametrize("a, b, expected", [
