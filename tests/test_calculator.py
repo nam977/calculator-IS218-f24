@@ -1,51 +1,47 @@
+# test_calculator.py
+
 import pytest
-from app.calculator import Calculator  # assuming the class is in a file named calculator.py
 
-# Fixture to instantiate the Calculator class
-@pytest.fixture
-def calculator():
-    return Calculator.create()
-
-# Parameterized tests for addition
+# Parameterized tests for the add method
 @pytest.mark.parametrize("a, b, expected", [
-    (10, 5, 15),
-    (-1, 1, 0),
+    (2, 3, 5),
+    (-1, -1, -2),
     (0, 0, 0),
-    (100, 200, 300)
+    (1.5, 2.5, 4.0),
 ])
-def test_addition(calculator, a, b, expected):
-    assert calculator.addition(a, b) == expected
+def test_add(calc, a, b, expected):
+    assert calc.add(a, b) == expected
 
-# Parameterized tests for subtraction
+# Parameterized tests for the subtract method
 @pytest.mark.parametrize("a, b, expected", [
-    (10, 5, 5),
-    (5, 10, -5),
+    (5, 3, 2),
+    (-1, -1, 0),
     (0, 0, 0),
-    (100, 50, 50)
+    (2.5, 1.0, 1.5),
 ])
-def test_subtraction(calculator, a, b, expected):
-    assert calculator.subtraction(a, b) == expected
+def test_subtract(calc, a, b, expected):
+    assert calc.subtract(a, b) == expected
 
-# Parameterized tests for multiplication
+# Parameterized tests for the multiply method
 @pytest.mark.parametrize("a, b, expected", [
-    (10, 5, 50),
-    (0, 10, 0),
-    (-1, 10, -10),
-    (7, 7, 49)
+    (2, 3, 6),
+    (-1, -1, 1),
+    (0, 5, 0),
+    (1.5, 2, 3.0),
 ])
-def test_multiplication(calculator, a, b, expected):
-    assert calculator.multiplication(a, b) == expected
+def test_multiply(calc, a, b, expected):
+    assert calc.multiply(a, b) == expected
 
-# Parameterized tests for division, including division by zero
+# Parameterized tests for the divide method
 @pytest.mark.parametrize("a, b, expected", [
-    (10, 5, 2.0),
-    (5, 2, 2.5),
-    (-10, 5, -2.0),
-    (10, 0, "Error! Division by zero.")
+    (10, 2, 5),
+    (-9, -3, 3),
+    (7.5, 2.5, 3.0),
 ])
-def test_division(calculator, a, b, expected):
-    assert calculator.division(a, b) == expected
+def test_divide(calc, a, b, expected):
+    assert calc.divide(a, b) == expected
 
-# Run pytest directly (if needed)
-if __name__ == "__main__":
-    pytest.main()
+# Test division by zero
+def test_divide_by_zero(calc):
+    with pytest.raises(ZeroDivisionError):
+        calc.divide(5, 0)
