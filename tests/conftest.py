@@ -5,10 +5,10 @@ import pytest
 
 from app.calculator import Calculator
 
+
 @pytest.fixture
 def calc():
     return Calculator.create()
-
 
 @pytest.fixture
 def repl():
